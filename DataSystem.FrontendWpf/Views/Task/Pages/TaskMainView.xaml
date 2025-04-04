@@ -18,23 +18,40 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        
+        <Grid Row="0">
 
-        <!-- Botão para cadastrar nova tarefa -->
-        <ui:Button
-         Grid.Row="0"
-         Command="{Binding AddTaskCommand}"
-         Background="{StaticResource LightBlueBrush}"
-         Foreground="White"
-         Content="Nova Tarefa"
-         Margin="10"
-         HorizontalAlignment="Left"
-         VerticalAlignment="Top" />
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
 
-        <ComboBox ItemsSource="{Binding TaskStatusFilterOptions}"
-          SelectedItem="{Binding SelectedStatus, Mode=TwoWay}"
-          DisplayMemberPath="DisplayName"
-          Width="150" Margin="10"
-          SelectionChanged="StatusFilter_Changed"/>
+            </Grid.ColumnDefinitions>
+            <!-- Botão para cadastrar nova tarefa -->
+            <ui:Button
+             Grid.Column="0"
+             Command="{Binding AddTaskCommand}"
+             Background="{StaticResource LightBlueBrush}"
+             Foreground="White"
+             Content="Nova Tarefa"
+             Margin="10"
+             HorizontalAlignment="Left"
+             VerticalAlignment="Top" />
+
+
+            <TextBlock Text="Filtro:" VerticalAlignment="Center" Grid.Column="2" Foreground="{StaticResource TextFillColorPrimaryBrush}"/>
+            
+            <ComboBox ItemsSource="{Binding TaskStatusFilterOptions}"
+              SelectedItem="{Binding SelectedStatus, Mode=TwoWay}"
+              DisplayMemberPath="DisplayName"
+              Width="150" Margin="10"
+              SelectionChanged="StatusFilter_Changed"
+              Grid.Column="3"/>
+
+        </Grid>
+
+
 
         <!-- DataGrid para exibir a lista de tarefas -->
         <DataGrid
@@ -45,8 +62,9 @@
          Margin="10">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Titulo" Binding="{Binding Title}" Width="*" />
-                <DataGridTextColumn Header="Criado Em" Binding="{Binding CreatedAt}" Width="*" />
-                <DataGridTextColumn Header="Completada Em" Binding="{Binding CompletedAt}" Width="*" />
+                <DataGridTextColumn Header="Criado Em" Binding="{Binding CreatedAt, StringFormat=dd/MM/yyyy HH:mm}" Width="*" />
+                <DataGridTextColumn Header="Completada Em" Binding="{Binding CompletedAt, StringFormat=dd/MM/yyyy HH:mm}" Width="*" />
+                <!--TODO [FEAT] implementar traducao para a lista de status-->
                 <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*" />
                 <DataGridTemplateColumn Header="Ações" Width="Auto">
                     <DataGridTemplateColumn.CellTemplate>
