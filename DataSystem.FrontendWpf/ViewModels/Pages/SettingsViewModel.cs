@@ -24,7 +24,7 @@ namespace DataSystem.FrontendWpf.ViewModels.Pages
         private void InitializeViewModel()
         {
             CurrentTheme = ApplicationThemeManager.GetAppTheme();
-            AppVersion = $"UiDesktopApp1 - {GetAssemblyVersion()}";
+            AppVersion = $"1.0.0 - {GetAssemblyVersion()}";
 
             _isInitialized = true;
         }

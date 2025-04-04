@@ -37,12 +37,6 @@ namespace DataSystem.FrontendWpf.ServiceExtensions
             services.AddSingleton<INavigationWindow, MainWindow>();
             services.AddSingleton<MainWindowViewModel>();
 
-            services.AddSingleton<DashboardPage>();
-            services.AddSingleton<DashboardViewModel>();
-
-            services.AddSingleton<DataPage>();
-            services.AddSingleton<DataViewModel>();
-
             services.AddSingleton<SettingsPage>();
             services.AddSingleton<SettingsViewModel>();
 
