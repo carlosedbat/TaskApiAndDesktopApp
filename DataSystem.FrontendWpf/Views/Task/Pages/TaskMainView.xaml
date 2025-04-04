@@ -1,0 +1,68 @@
+﻿<Page x:Class="DataSystem.FrontendWpf.Views.Task.Pages.TaskMainView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:local="clr-namespace:DataSystem.FrontendWpf.Views.Task.Pages" xmlns:pages="clr-namespace:DataSystem.FrontendWpf.ViewModels.Task.Pages" d:DataContext="{d:DesignInstance Type=pages:TaskMainPageViewModel}"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Tarefas"
+        ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+        ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+      >
+
+    <Grid VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Botão para cadastrar nova tarefa -->
+        <ui:Button
+         Grid.Row="0"
+         Command="{Binding AddTaskCommand}"
+         Background="{StaticResource LightBlueBrush}"
+         Foreground="White"
+         Content="Nova Tarefa"
+         Margin="10"
+         HorizontalAlignment="Left"
+         VerticalAlignment="Top" />
+
+        <ComboBox ItemsSource="{Binding TaskStatusFilterOptions}"
+          SelectedItem="{Binding SelectedStatus, Mode=TwoWay}"
+          DisplayMemberPath="DisplayName"
+          Width="150" Margin="10"
+          SelectionChanged="StatusFilter_Changed"/>
+
+        <!-- DataGrid para exibir a lista de tarefas -->
+        <DataGrid
+         Grid.Row="1"
+         ItemsSource="{Binding Tasks}"
+         SelectedItem="{Binding SelectedTask, Mode=TwoWay}"
+         AutoGenerateColumns="False"
+         Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Titulo" Binding="{Binding Title}" Width="*" />
+                <DataGridTextColumn Header="Criado Em" Binding="{Binding CreatedAt}" Width="*" />
+                <DataGridTextColumn Header="Completada Em" Binding="{Binding CompletedAt}" Width="*" />
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*" />
+                <DataGridTemplateColumn Header="Ações" Width="Auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="✏️" 
+                             Command="{Binding DataContext.EditTaskCommand, RelativeSource={RelativeSource AncestorType=Page}}" />
+                                <Button Content="🗑️" 
+                             Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=Page}}" 
+                             Margin="5,0,0,0" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Page>

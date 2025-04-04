@@ -1,0 +1,54 @@
+﻿<Window x:Class="DataSystem.FrontendWpf.Views.Task.Windows.TaskDetailWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DataSystem.FrontendWpf.Views.Task.Windows" xmlns:windows="clr-namespace:DataSystem.FrontendWpf.ViewModels.Task.Windows" d:DataContext="{d:DesignInstance Type=windows:TaskDetailWindowViewModel}"
+        mc:Ignorable="d"
+        Background="{DynamicResource ApplicationBackgroundBrush}"
+        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+        Title="Tarefa" Height="450" Width="800">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Labels and Inputs -->
+        <TextBlock Text="Titulo:" VerticalAlignment="Center" Grid.Row="0" />
+        <TextBox Text="{Binding TaskObject.Title, UpdateSourceTrigger=PropertyChanged}" 
+             Grid.Row="0" Margin="100,0,0,10" Width="300" MaxLength="100"/>
+        
+        <!--TODO [FEAT] Implementar responsividade para a descrição e demais itens-->
+        <TextBlock Text="Descrição:" VerticalAlignment="Center" Grid.Row="1" />
+        <TextBox Text="{Binding TaskObject.Description, UpdateSourceTrigger=PropertyChanged}" 
+             Grid.Row="1" Margin="100,0,0,10" Width="300" MaxLength="1000"/>
+
+        <TextBlock Text="Status:" VerticalAlignment="Center" Grid.Row="2" />
+    <ComboBox SelectedItem="{Binding TaskObject.Status, UpdateSourceTrigger=PropertyChanged}"
+              SelectedValue="{Binding TaskObject.Status, Mode=TwoWay}"
+              ItemsSource="{Binding TaskStatus}" 
+              SelectedValuePath="Value"
+              DisplayMemberPath="DisplayName"
+              Grid.Row="2" Margin="100,0,0,10" Width="300"/>
+
+        <TextBlock Text="Criado em:" VerticalAlignment="Center" Grid.Row="3" />
+        <DatePicker SelectedDate="{Binding TaskObject.CreatedAt, UpdateSourceTrigger=PropertyChanged}" 
+                    Grid.Row="3" Margin="100,0,0,10" Width="300" IsEnabled="False"/>
+
+        <TextBlock Text="Concluído em:" VerticalAlignment="Center" Grid.Row="4" />
+        <DatePicker SelectedDate="{Binding TaskObject.CompletedAt, UpdateSourceTrigger=PropertyChanged}" 
+                    Grid.Row="4" Margin="100,0,0,10" Width="300" />
+
+        <!-- Save and Cancel Buttons -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="6" Margin="0,20,0,0">
+            <Button Content="Salvar" Command="{Binding SaveCommand}" Width="100" Margin="0,0,10,0"/>
+            <Button Content="Cancelar" Command="{Binding CancelCommand}" Width="100"/>
+        </StackPanel>
+    </Grid>
+</Window>
