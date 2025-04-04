@@ -14,7 +14,7 @@ namespace DataSystem.FrontendWpf.ViewModels.Windows
             new NavigationViewItem()
             {
                 Content = "Tarefas",
-                Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
+                Icon = new SymbolIcon { Symbol = SymbolRegular.TaskListAdd20 },
                 TargetPageType = typeof(Views.Task.Pages.TaskMainView)
             }
         };
@@ -24,7 +24,7 @@ namespace DataSystem.FrontendWpf.ViewModels.Windows
         {
             new NavigationViewItem()
             {
-                Content = "Settings",
+                Content = "Configuração",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 },
                 TargetPageType = typeof(Views.Pages.SettingsPage)
             }
