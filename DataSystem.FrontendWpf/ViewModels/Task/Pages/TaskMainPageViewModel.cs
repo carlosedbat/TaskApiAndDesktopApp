@@ -106,9 +106,20 @@ namespace DataSystem.FrontendWpf.ViewModels.Task.Pages
             var detailWindow = _serviceProvider.GetRequiredService<TaskDetailWindow>();
             var viewModel = _serviceProvider.GetRequiredService<TaskDetailWindowViewModel>();
 
-            viewModel.TaskObject = taskDTO;
+            var clonedTask = new TaskDTO
+            {
+                Id = taskDTO.Id,
+                Title = taskDTO.Title,
+                Description = taskDTO.Description,
+                CreatedAt = taskDTO.CreatedAt,
+                CompletedAt = taskDTO.CompletedAt,
+                Status = taskDTO.Status
+            };
+
+            viewModel.TaskObject = clonedTask;
             viewModel.TaskCrudState = EnumCrudState.Update;
             viewModel.TaskUpdated += OnTaskUpdated;
+
             detailWindow.DataContext = viewModel;
             detailWindow.ShowDialog();
         }
